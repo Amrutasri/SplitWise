@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Friend {
 
     private String name;
@@ -8,7 +10,17 @@ public class Friend {
         this.expense = expense;
     }
 
-    double trackExpense(double spentAmount) {
-        return expense.add(spentAmount);
+    Expense getExpense() {
+        return expense;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return object.getClass() == getClass();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expense);
     }
 }
