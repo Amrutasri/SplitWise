@@ -5,29 +5,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FriendTest {
 
-    Expense expense1 = new Expense(100);
-    Expense expense2 = new Expense(40);
-    Expense expense3 = new Expense(100);
+    Money money1 = new Money(100);
+    Money money2 = new Money(40);
+    Money money3 = new Money(100);
 
-    @DisplayName("should equal the expense1 which is assigned to the friend.")
+    @DisplayName("should equal the money1 which is assigned to the friend.")
     @Test
     void shouldEqualTheExpenseWhichIsAssignedToFriend() {
-        Friend friend = new Friend("A",expense1);
-        assertEquals(expense1,friend.getExpense());
+        Friend friend = new Friend("A", money1);
+        assertEquals(money1,friend.getMoney());
     }
 
-    @DisplayName("should not equal the expense1 which is not assigned to friend.")
+    @DisplayName("should not equal the money1 which is not assigned to friend.")
     @Test
     void shouldNotEqualTheExpenseWhichIsNotAssignedToFriend() {
-        Friend friend = new Friend("A",expense2);
-        assertNotEquals(expense1,friend.getExpense());
+        Friend friend = new Friend("A", money2);
+        assertNotEquals(money1,friend.getMoney());
     }
 
-    @DisplayName("should equal expense3 which is not assigned to friend and the expense1 assigned to friend where the value is same.")
+    @DisplayName("should equal money3 which is not assigned to friend and the money1 assigned to friend where the value is same.")
     @Test
     void shouldEqualTheExpense3WhichIsNotAssignedToFriendAndExpenseAssignedToFriendButValueIsSame() {
-        Friend friend = new Friend("A",expense1);
-        assertEquals(expense3,friend.getExpense());
+        Friend friend = new Friend("A", money1);
+        assertEquals(money3,friend.getMoney());
     }
 
 }

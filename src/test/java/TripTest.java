@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TripTest {
 
-    Expense expense1 = new Expense(100);
-    Friend friend1 = new Friend("A",expense1);
-    Expense expense2 = new Expense(40);
-    Friend friend2 = new Friend("B",expense2);
+    Money money1 = new Money(100);
+    Friend friend1 = new Friend("A", money1);
+    Money money2 = new Money(40);
+    Friend friend2 = new Friend("B", money2);
     List<Friend> friendList = new ArrayList<>();
 
     @DisplayName("should return an empty list when friend is not added at all.")
