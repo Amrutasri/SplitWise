@@ -3,19 +3,19 @@ import java.util.Objects;
 public class Friend {
 
     private String name;
-    private Expense expense;
+    private Money money;
 
-    Friend(String name, Expense expense) {
+    Friend(String name, Money money) {
         this.name = name;
-        this.expense = expense;
+        this.money = money;
     }
 
     String getName() {
         return name;
     }
 
-    Expense getExpense() {
-        return expense;
+    Money getMoney() {
+        return money;
     }
 
     @Override
@@ -25,6 +25,6 @@ public class Friend {
 
     @Override
     public int hashCode() {
-        return Objects.hash(expense);
+        return Objects.hash(money);
     }
 }
