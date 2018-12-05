@@ -1,4 +1,4 @@
-public class Output {
+public class OutputDriver {
     Object object;
     public void print(Object object) {
         this.object = object;
