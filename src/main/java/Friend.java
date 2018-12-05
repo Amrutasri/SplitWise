@@ -10,6 +10,10 @@ public class Friend {
         this.expense = expense;
     }
 
+    String getName() {
+        return name;
+    }
+
     Expense getExpense() {
         return expense;
     }
