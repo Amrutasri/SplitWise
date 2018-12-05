@@ -1,14 +1,18 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class SplitWiseTest {
 
-    @DisplayName("should print friend B gives D -> 5.")
+    OutputDriver outputDriver = mock(OutputDriver.class);
+
+    @DisplayName("should print friend B gives A -> 5.")
     @Test
     void shouldPrintFriendBGivesD_5() {
         Expense expense1 = new Expense(50);
@@ -22,10 +26,14 @@ class SplitWiseTest {
 
         Trip trip = new Trip(friendList);
 
-        SplitWise splitWise = new SplitWise(trip);
-        splitWise.printListOfDebtorsAndCreditors();
+        SplitWise splitWise = new SplitWise(trip,outputDriver);
+        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
 
-        assertEquals(1,splitWise.getDebtorsListSize());
+        Mockito.verify(outputDriver).print("B");
+        Mockito.verify(outputDriver).print(" -> ");
+        Mockito.verify(outputDriver).print("A");
+        Mockito.verify(outputDriver).print(" = ");
+        Mockito.verify(outputDriver).print(5.0);
     }
 
     @DisplayName("should print")
@@ -45,8 +53,8 @@ class SplitWiseTest {
 
         Trip trip = new Trip(friendList);
 
-        SplitWise splitWise = new SplitWise(trip);
-        splitWise.printListOfDebtorsAndCreditors();
+        SplitWise splitWise = new SplitWise(trip,outputDriver);
+        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
 
         assertEquals(2,splitWise.getDebtorsListSize());
     }
@@ -71,8 +79,8 @@ class SplitWiseTest {
 
         Trip trip = new Trip(friendList);
 
-        SplitWise splitWise = new SplitWise(trip);
-        splitWise.printListOfDebtorsAndCreditors();
+        SplitWise splitWise = new SplitWise(trip,outputDriver);
+        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
 
         assertEquals(3,splitWise.getDebtorsListSize());
     }
