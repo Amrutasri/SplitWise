@@ -9,8 +9,11 @@ public class SplitWise {
 
     private double expenseOnEach;
 
-    SplitWise(Trip trip) {
+    private OutputDriver outputDriver;
+
+    SplitWise(Trip trip, OutputDriver outputDriver) {
         friends = trip.getFriendList();
+        this.outputDriver = outputDriver;
         creditors = new ArrayList<>();
         debtors =  new ArrayList<>();
     }
@@ -67,10 +70,15 @@ public class SplitWise {
         }
     }
 
-    void printListOfDebtorsAndCreditors() {
+    void printFriendsWhoNeedToPayHowMuchToAFriend() {
         settle();
         for(int i=0; i<debtors.size(); i++) {
-            System.out.println(debtors.get(i).getName() +" -> "+ creditors.get(i).getName() + " = "+ debtors.get(i).getExpense().getAmountToRepay());
+            outputDriver.print(debtors.get(i).getName());
+            outputDriver.print(" -> ");
+            outputDriver.print(creditors.get(i).getName());
+            outputDriver.print(" = ");
+            outputDriver.print(debtors.get(i).getExpense().getAmountToRepay());
+            //System.out.println(debtors.get(i).getName() +" -> "+ creditors.get(i).getName() + " = "+ debtors.get(i).getExpense().getAmountToRepay());
         }
     }
 
