@@ -18,6 +18,16 @@ class InputDriverTest {
         assertEquals(15.47,inputDriver.readInputAsDouble());
     }
 
+    @DisplayName("should return InputDriver which is a string.")
+    @Test
+    void shouldReturnInputDriverWhichIsAString() {
+        setSystemIn("InputDriver");
+
+        InputDriver inputDriver = new InputDriver();
+
+        assertEquals("InputDriver",inputDriver.readInputAsString());
+    }
+
     private void setSystemIn(String string) {
         System.setIn(new ByteArrayInputStream(string.getBytes()));
     }
