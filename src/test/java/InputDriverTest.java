@@ -18,7 +18,7 @@ class InputDriverTest {
 
         assertEquals(1,inputDriver.readInputAsInteger());
     }
-    
+
     @DisplayName("should return double (in this case 15.47).")
     @Test
     void shouldReturn15Point47WhichIsDouble() {

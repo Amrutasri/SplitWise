@@ -1,8 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class SplitWiseApplication {
 
     public static void main(String args[]) {
 
-        InputDriver
+        InputDriver inputDriver = new InputDriver();
+        OutputDriver outputDriver = new OutputDriver();
 
+        outputDriver.print("Enter number of friends in trip: ");
+        int numberOfFriends = inputDriver.readInputAsInteger();
+
+        List<Friend> friends = new ArrayList<>(numberOfFriends);
+
+        for(int index = 0 ; index<numberOfFriends ; index++) {
+            outputDriver.print("Enter name of friend: ");
+            String name = inputDriver.readInputAsString();
+            outputDriver.print("Enter amount spent: ");
+            double amountSpent = inputDriver.readInputAsDouble();
+            Money money = new Money(amountSpent);
+            Friend friend = new Friend(name,money);
+            friends.add(friend);
+        }
+
+        Trip trip = new Trip(friends);
+
+        SplitWise splitWise = new SplitWise(trip,outputDriver);
+        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
     }
 }
