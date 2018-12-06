@@ -4,11 +4,22 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InputDriverTest {
 
-    @DisplayName("should return 15.47 which is double.")
+
+    @DisplayName("should return an integer (in this case 1).")
+    @Test
+    void shouldReturnAnInteger() {
+        setSystemIn("1");
+
+        InputDriver inputDriver = new InputDriver();
+
+        assertEquals(1,inputDriver.readInputAsInteger());
+    }
+    
+    @DisplayName("should return double (in this case 15.47).")
     @Test
     void shouldReturn15Point47WhichIsDouble() {
         setSystemIn("15.47");
@@ -18,7 +29,7 @@ class InputDriverTest {
         assertEquals(15.47,inputDriver.readInputAsDouble());
     }
 
-    @DisplayName("should return InputDriver which is a string.")
+    @DisplayName("should return a string (in this case 'InputDriver').")
     @Test
     void shouldReturnInputDriverWhichIsAString() {
         setSystemIn("InputDriver");
