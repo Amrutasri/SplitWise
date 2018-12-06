@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class SplitWise {
+class SplitWise {
 
     private List<Friend> friends;
     private List<Friend> creditors;
