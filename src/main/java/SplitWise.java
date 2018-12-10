@@ -70,18 +70,6 @@ class SplitWise {
         }
     }
 
-    void printFriendsWhoNeedToPayHowMuchToAFriend() {
-        settle();
-        for(int i=0; i<debtors.size(); i++) {
-            outputDriver.print(debtors.get(i).getName());
-            outputDriver.print(" -> ");
-            outputDriver.print(creditors.get(i).getName());
-            outputDriver.print(" = ");
-            outputDriver.print(debtors.get(i).getMoney().getAmountToRepay());
-            //System.out.println(debtors.get(i).getName() +" -> "+ creditors.get(i).getName() + " = "+ debtors.get(i).getMoney().getAmountToRepay());
-        }
-    }
-
     int getDebtorsListSize() {
         return debtors.size();
     }
