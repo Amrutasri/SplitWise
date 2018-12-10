@@ -1,24 +1,21 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class SplitWiseTest {
 
-    OutputDriver outputDriver = mock(OutputDriver.class);
+    Transaction transaction = mock(Transaction.class);
 
     @DisplayName("should print friend B gives A -> 5.")
     @Test
     void shouldPrintFriendBGivesD_5() {
-        Money money1 = new Money(50);
-        Friend friend1 = new Friend("A", money1);
-        Money money2 = new Money(40);
-        Friend friend2 = new Friend("B", money2);
+        Friend friend1 = new Friend("A", 100);
+        Friend friend2 = new Friend("B", 40);
 
         List<Friend> friendList = new ArrayList<>();
         friendList.add(friend1);
@@ -26,25 +23,20 @@ class SplitWiseTest {
 
         Trip trip = new Trip(friendList);
 
-        SplitWise splitWise = new SplitWise(trip,outputDriver);
-        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
+        SplitWise splitWise = new SplitWise(trip);
+        splitWise.settle();
 
-        Mockito.verify(outputDriver).print("B");
-        Mockito.verify(outputDriver).print(" -> ");
-        Mockito.verify(outputDriver).print("A");
-        Mockito.verify(outputDriver).print(" = ");
-        Mockito.verify(outputDriver).print(5.0);
+        verify(transaction).setCreditAmount(30);
+        verify(transaction).setCreditor("A");
+
     }
 
-    @DisplayName("should print")
+    @DisplayName("should print B gives A -> 10 and C gives A -> 40. ")
     @Test
     void shouldPrint() {
-        Money money1 = new Money(100);
-        Friend friend1 = new Friend("A", money1);
-        Money money2 = new Money(40);
-        Friend friend2 = new Friend("B", money2);
-        Money money3 = new Money(10);
-        Friend friend3 = new Friend("C", money3);
+        Friend friend1 = new Friend("A", 100);
+        Friend friend2 = new Friend("B", 40);
+        Friend friend3 = new Friend("C", 10);
 
         List<Friend> friendList = new ArrayList<>();
         friendList.add(friend1);
@@ -53,23 +45,18 @@ class SplitWiseTest {
 
         Trip trip = new Trip(friendList);
 
-        SplitWise splitWise = new SplitWise(trip,outputDriver);
-        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
+        SplitWise splitWise = new SplitWise(trip);
+        splitWise.settle();
 
-        assertEquals(2,splitWise.getDebtorsListSize());
     }
 
     @DisplayName("should print friend A gives D -> 10, B gives D -> 70, C gives D -> 10.")
     @Test
     void shouldPrintFriendAGivesD_10AndBGivesD_70AndCGivesD_10() {
-        Money money1 = new Money(50);
-        Friend friend1 = new Friend("A", money1);
-        Money money2 = new Money(40);
-        Friend friend2 = new Friend("B", money2);
-        Money money3 = new Money(150);
-        Friend friend3 = new Friend("C", money3);
-        Money money4 = new Money(200);
-        Friend friend4 = new Friend("D", money4);
+        Friend friend1 = new Friend("A", 100);
+        Friend friend2 = new Friend("B", 40);
+        Friend friend3 = new Friend("C", 100);
+        Friend friend4 = new Friend("D", 200);
 
         List<Friend> friendList = new ArrayList<>();
         friendList.add(friend1);
@@ -79,9 +66,7 @@ class SplitWiseTest {
 
         Trip trip = new Trip(friendList);
 
-        SplitWise splitWise = new SplitWise(trip,outputDriver);
-        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
-
-        assertEquals(3,splitWise.getDebtorsListSize());
+        SplitWise splitWise = new SplitWise(trip);
+        splitWise.settle();
     }
 }
