@@ -1,30 +1,18 @@
-import java.util.Objects;
-
 public class Friend {
 
     private String name;
-    private Money money;
+    private double spentAmount;
 
-    Friend(String name, Money money) {
+    Friend(String name, double spentAmount) {
         this.name = name;
-        this.money = money;
+        this.spentAmount = spentAmount;
     }
 
     String getName() {
         return name;
     }
 
-    Money getMoney() {
-        return money;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return object.getClass() == getClass();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(money);
+    double getSpentAmount() {
+        return spentAmount;
     }
 }
