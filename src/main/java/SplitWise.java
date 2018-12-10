@@ -21,27 +21,27 @@ class SplitWise {
     private void split() {
         double totalSpentAmount = 0;
         for (Friend friend : friends) {
-            Money money = friend.getMoney();
-            totalSpentAmount = money.add(totalSpentAmount);
+            double spentAmount = friend.getSpentAmount();
+            totalSpentAmount = spentAmount + totalSpentAmount;
         }
         expenseOnEach = totalSpentAmount / friends.size();
     }
 
     private void assignExpense() {
         for (Friend friend : friends) {
-            Money money = friend.getMoney();
-            if ((money.isGreater(expenseOnEach))) {
-                money.setAmountToGetBack(money.subtract(expenseOnEach));
+            double spentAmount = friend.getSpentAmount();
+            if ((spentAmount>(expenseOnEach))) {
+                //spentAmount.setAmountToGetBack(spentAmount-expenseOnEach);
             } else {
-                money.setAmountToRepay(money.subtract(expenseOnEach));
+                //spentAmount.setAmountToRepay(spentAmount-expenseOnEach);
             }
         }
     }
 
     private void resolve(Friend creditor, double creditorAmountToGetBack) {
         for (Friend debtor : friends) {
-            Money debtorMoney = debtor.getMoney();
-            double debtorExpenseToRepay = debtorMoney.getAmountToRepay();
+            double spentAmount = debtor.getSpentAmount();
+            /*double debtorExpenseToRepay = spentAmount.getAmountToRepay();
             if (debtorExpenseToRepay != 0) {
                 if (debtorExpenseToRepay == creditorAmountToGetBack) {
                     creditors.add(creditor); debtors.add(debtor);
@@ -51,10 +51,10 @@ class SplitWise {
                     creditors.add(creditor); debtors.add(debtor);
                 } else if (debtorExpenseToRepay > creditorAmountToGetBack) {
                     creditors.add(creditor); debtors.add(debtor);
-                    debtorMoney.setAmountToRepay(debtorMoney.subtract(creditorAmountToGetBack));
+                    spentAmount.setAmountToRepay(spentAmount.subtract(creditorAmountToGetBack));
                     break;
                 }
-            }
+            }*/
         }
     }
 
@@ -62,11 +62,11 @@ class SplitWise {
         split();
         assignExpense();
         for (Friend creditor : friends) {
-            Money creditorMoney = creditor.getMoney();
-            if (creditorMoney.getAmountToRepay() == 0) {
-                double creditorAmountToGetBack = creditorMoney.getAmountToGetBack();
+            double spentAmount = creditor.getSpentAmount();
+            /*if (spentAmount.getAmountToRepay() == 0) {
+                double creditorAmountToGetBack = spentAmount.getAmountToGetBack();
                 resolve(creditor, creditorAmountToGetBack);
-            }
+            }*/
         }
     }
 
