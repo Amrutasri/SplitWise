@@ -9,11 +9,8 @@ class SplitWise {
 
     private double expenseOnEach;
 
-    private OutputDriver outputDriver;
-
-    SplitWise(Trip trip, OutputDriver outputDriver) {
+    SplitWise(Trip trip) {
         friends = trip.getFriendList();
-        this.outputDriver = outputDriver;
         creditors = new ArrayList<>();
         debtors =  new ArrayList<>();
     }
