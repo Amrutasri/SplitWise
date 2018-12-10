@@ -26,6 +26,16 @@ public class SplitWiseApplication {
         Trip trip = new Trip(friends);
 
         SplitWise splitWise = new SplitWise(trip,outputDriver);
-        splitWise.printFriendsWhoNeedToPayHowMuchToAFriend();
+        void printFriendsWhoNeedToPayHowMuchToAFriend() {
+            settle();
+            for(int i=0; i<debtors.size(); i++) {
+                outputDriver.print(debtors.get(i).getName());
+                outputDriver.print(" -> ");
+                outputDriver.print(creditors.get(i).getName());
+                outputDriver.print(" = ");
+                outputDriver.print(debtors.get(i).getMoney().getAmountToRepay());
+                //System.out.println(debtors.get(i).getName() +" -> "+ creditors.get(i).getName() + " = "+ debtors.get(i).getMoney().getAmountToRepay());
+            }
+        }
     }
 }
