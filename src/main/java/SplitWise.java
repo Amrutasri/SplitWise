@@ -58,7 +58,7 @@ class SplitWise {
         }
     }
 
-    private void settle() {
+    void settle() {
         split();
         assignExpense();
         for (Friend creditor : friends) {
