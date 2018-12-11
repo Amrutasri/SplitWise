@@ -6,6 +6,7 @@ public class Friend {
     private String name;
     private double spentAmount;
 
+    private double amountToRepay=0;
     private List<Transaction> transactions;
 
     Friend(String name, double spentAmount) {
@@ -20,6 +21,14 @@ public class Friend {
 
     double getSpentAmount() {
         return spentAmount;
+    }
+
+    void setAmountToRepay(double amountToRepay) {
+        this.amountToRepay = amountToRepay;
+    }
+
+    double getAmountToRepay() {
+        return amountToRepay;
     }
 
     void addTransaction(Transaction transaction) {
