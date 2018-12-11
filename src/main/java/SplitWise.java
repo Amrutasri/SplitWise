@@ -24,7 +24,7 @@ class SplitWise {
         expenseOnEach = totalSpentAmount / friends.size();
     }
 
-    private void assignExpense() {
+    /*private void assignExpense() {
         for (Friend friend : friends) {
             double spentAmount = friend.getSpentAmount();
             if ((spentAmount>(expenseOnEach))) {
@@ -33,7 +33,7 @@ class SplitWise {
                 //spentAmount.setAmountToRepay(spentAmount-expenseOnEach);
             }
         }
-    }
+    }*/
 
     private void resolve(Friend creditor, double creditorAmountToGetBack) {
         for (Friend debtor : friends) {
@@ -57,13 +57,12 @@ class SplitWise {
 
     void settle() {
         split();
-        assignExpense();
         for (Friend creditor : friends) {
             double spentAmount = creditor.getSpentAmount();
-            /*if (spentAmount.getAmountToRepay() == 0) {
-                double creditorAmountToGetBack = spentAmount.getAmountToGetBack();
+            if (spentAmount > expenseOnEach) {
+                double creditorAmountToGetBack = spentAmount - expenseOnEach;
                 resolve(creditor, creditorAmountToGetBack);
-            }*/
+            }
         }
     }
 

@@ -26,8 +26,7 @@ class SplitWiseTest {
         SplitWise splitWise = new SplitWise(trip);
         splitWise.settle();
 
-        verify(transaction).setCreditAmount(30);
-        verify(transaction).setCreditor("A");
+        assertTrue(friend1.getTransactions.get(0).equals(transaction1));
 
     }
 
