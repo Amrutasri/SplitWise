@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Transaction {
 
     private double amount;
@@ -20,5 +22,20 @@ public class Transaction {
 
     Friend getDebtor() {
         return debtor;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Transaction that = (Transaction) object;
+        return Double.compare(that.amount, amount) == 0 &&
+                Objects.equals(creditor, that.creditor) &&
+                Objects.equals(debtor, that.debtor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount, creditor, debtor);
     }
 }
