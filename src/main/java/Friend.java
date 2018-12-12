@@ -25,10 +25,4 @@ public class Friend {
     double getAmountToRepay() {
         return amountToRepay;
     }
-
-    void isValidInput(int spentAmount) throws InvalidInputException {
-        if(spentAmount<0) {
-            throw new InvalidInputException();
-        }
-    }
 }
