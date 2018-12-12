@@ -1,18 +1,24 @@
 public class Transaction {
 
     private double amount;
-    private String creditorName;
+    private Friend creditor;
+    private Friend debtor;
 
-    Transaction(double amount, String name) {
+    Transaction(double amount, Friend creditor, Friend debtor) {
         this.amount = amount;
-        creditorName = name;
+        this.creditor = creditor;
+        this.debtor = debtor;
     }
 
     double getAmount() {
         return amount;
     }
 
-    String getCreditorName() {
-        return creditorName;
+    Friend getCreditor() {
+        return creditor;
+    }
+
+    Friend getDebtor() {
+        return debtor;
     }
 }
