@@ -31,7 +31,6 @@ class SplitWise {
                     transactions.add(new Transaction(debtorExpenseToRepay,creditor,debtor));
                     creditorAmountToGetBack = 0;
                     debtor.setAmountToRepay(0);
-
                 }
                 else if (debtorExpenseToRepay > creditorAmountToGetBack) {
                     creditorAmountToGetBack = creditorAmountToGetBack - debtorExpenseToRepay;
@@ -47,7 +46,7 @@ class SplitWise {
         }
     }
 
-    void settle() {
+    List<Transaction> settle() {
         calculateAverageOfSpentAmountOfFriends();
         for (Friend creditor : friends) {
             if (creditor.getSpentAmount() > expenseOnEach) {
