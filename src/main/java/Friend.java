@@ -1,18 +1,13 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Friend {
 
     private String name;
-    private double spentAmount;
+    private int spentAmount;
 
-    private double amountToRepay=0;
-    private List<Transaction> transactions;
+    private double amountToRepay = 0;
 
-    Friend(String name, double spentAmount) {
+    Friend(String name, int spentAmount) {
         this.name = name;
         this.spentAmount = spentAmount;
-        transactions = new ArrayList<>();
     }
 
     String getName() {
@@ -31,11 +26,9 @@ public class Friend {
         return amountToRepay;
     }
 
-    void addTransaction(Transaction transaction) {
-        transactions.add(transaction);
-    }
-
-    List<Transaction> getTransactions() {
-        return transactions;
+    void isValidInput(int spentAmount) throws InvalidInputException {
+        if(spentAmount<0) {
+            throw new InvalidInputException();
+        }
     }
 }
