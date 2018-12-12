@@ -1,22 +1,26 @@
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransactionTest {
 
-    Transaction transaction = new Transaction(100,"A");
+    Friend friendA = new Friend("A",100);
+    Friend friendB = new Friend("B",40);
+    Transaction transaction = new Transaction(30,friendA,friendB);
 
-    @DisplayName("should return 100 as the amount.")
     @Test
-    void shouldReturn100AsAmount() {
-        assertEquals(100,transaction.getAmount());
+    void shouldReturn40AsAmount() {
+        assertEquals(30,transaction.getAmount());
     }
 
-    @DisplayName("should return A as the name of the creditor.")
     @Test
-    void shouldReturnAAsTheNameOfTheCreditor() {
-        assertEquals("A",transaction.getCreditorName());
+    void shouldReturnFriendAAsCreditor() {
+        assertEquals(friendA,transaction.getCreditor());
+    }
+
+    @Test
+    void shouldReturnFriendBAsDebtor() {
+        assertEquals(friendB,transaction.getDebtor());
     }
 
 }
