@@ -1,20 +1,15 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.mock;
 
 class FriendTest {
 
     Friend friend = new Friend("A", 100);
     Transaction transaction1 = mock(Transaction.class);
     Transaction transaction2 = mock(Transaction.class);
-
-    @BeforeEach
-    void init() {
-        friend.addTransaction(transaction1);
-    }
 
     @DisplayName("should equal 100 which is assigned to the friend.")
     @Test
@@ -39,17 +34,5 @@ class FriendTest {
     @Test
     void shouldNotEqualTheNameBAsAIsTheNameAssigned() {
         assertNotEquals("B",friend.getName());
-    }
-
-    @DisplayName("should add a Transaction to the list.")
-    @Test
-    void shouldAddATransactionToTheList() {
-        assertTrue(friend.getTransactions().get(0).equals(transaction1));
-    }
-
-    @DisplayName("should not return the transaction2 which is not added to the list.")
-    @Test
-    void shouldNotReturnTheTransaction2WhichIsNotAddedToTheList() {
-        assertFalse(friend.getTransactions().get(0).equals(transaction2));
     }
 }
