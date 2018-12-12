@@ -3,13 +3,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.mock;
 
 class FriendTest {
 
     Friend friend = new Friend("A", 100);
-    Transaction transaction1 = mock(Transaction.class);
-    Transaction transaction2 = mock(Transaction.class);
 
     @DisplayName("should equal 100 which is assigned to the friend.")
     @Test

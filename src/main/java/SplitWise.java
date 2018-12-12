@@ -4,18 +4,16 @@ import java.util.List;
 class SplitWise {
 
     private List<Friend> friends;
-    private List<Friend> creditors;
-    private List<Friend> debtors;
+    private List<Transaction> transactions;
 
     private double expenseOnEach;
 
     SplitWise(Trip trip) {
         friends = trip.getFriendList();
-        creditors = new ArrayList<>();
-        debtors =  new ArrayList<>();
+        transactions = new ArrayList<>();
     }
 
-    private void split() {
+    private void calculateAverageOfSpentAmountOfFriends() {
         double totalSpentAmount = 0;
         for (Friend friend : friends) {
             double spentAmount = friend.getSpentAmount();
@@ -24,36 +22,25 @@ class SplitWise {
         expenseOnEach = totalSpentAmount / friends.size();
     }
 
-    private void assignAmountToRepay() {
-        for (Friend friend : friends) {
-            double spentAmount = friend.getSpentAmount();
-            if (spentAmount<expenseOnEach) {
-                friend.setAmountToRepay(expenseOnEach-spentAmount);
-            }
-        }
-    }
-
     private void resolve(Friend creditor, double creditorAmountToGetBack) {
         for (Friend debtor : friends) {
-            double debtorExpenseToRepay = debtor.getAmountToRepay();
-            if (debtorExpenseToRepay != 0) {
+            if (debtor.getSpentAmount() < expenseOnEach) {
+                debtor.setAmountToRepay(expenseOnEach - debtor.getSpentAmount());
+                double debtorExpenseToRepay = debtor.getAmountToRepay();
                 if (debtorExpenseToRepay == creditorAmountToGetBack) {
-                    Transaction transaction = new Transaction(debtorExpenseToRepay,creditor.getName());
-                    debtor.addTransaction(transaction);
+                    transactions.add(new Transaction(debtorExpenseToRepay,creditor,debtor));
                     creditorAmountToGetBack = 0;
                     debtor.setAmountToRepay(0);
 
                 }
                 else if (debtorExpenseToRepay > creditorAmountToGetBack) {
                     creditorAmountToGetBack = creditorAmountToGetBack - debtorExpenseToRepay;
-                    Transaction transaction = new Transaction(creditorAmountToGetBack,creditor.getName());
-                    debtor.addTransaction(transaction);
+                    transactions.add(new Transaction(creditorAmountToGetBack,creditor,debtor));
                     debtor.setAmountToRepay(debtorExpenseToRepay-creditorAmountToGetBack);
                 }
                 else if (debtorExpenseToRepay < creditorAmountToGetBack) {
                     creditorAmountToGetBack = creditorAmountToGetBack - debtorExpenseToRepay;
-                    Transaction transaction = new Transaction(debtorExpenseToRepay,creditor.getName());
-                    debtor.addTransaction(transaction);
+                    transactions.add(new Transaction(debtorExpenseToRepay,creditor,debtor));
                     debtor.setAmountToRepay(0);
                 }
             }
@@ -61,10 +48,9 @@ class SplitWise {
     }
 
     void settle() {
-        split();
-        assignAmountToRepay();
+        calculateAverageOfSpentAmountOfFriends();
         for (Friend creditor : friends) {
-            if (creditor.getAmountToRepay() == 0) {
+            if (creditor.getSpentAmount() > expenseOnEach) {
                 double creditorAmountToGetBack = creditor.getSpentAmount()-expenseOnEach;
                 resolve(creditor, creditorAmountToGetBack);
             }
