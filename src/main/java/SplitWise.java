@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class SplitWise {
 
@@ -54,5 +55,19 @@ class SplitWise {
                 resolve(creditor, creditorAmountToGetBack);
             }
         }
+        return transactions;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        SplitWise splitWise = (SplitWise) object;
+        return Objects.equals(transactions, splitWise.transactions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactions);
     }
 }
