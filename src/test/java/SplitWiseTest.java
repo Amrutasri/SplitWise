@@ -1,19 +1,30 @@
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SplitWiseTest {
 
-    Transaction transaction = mock(Transaction.class);
-
-    @DisplayName("should print friend B gives A -> 5.")
     @Test
-    void shouldPrintFriendBGivesD_5() {
+    void shouldReturnAnEmptyTransactionListAsAmountSpentByEachFriendIsEqual() {
+        Friend friendA = new Friend("A",44);
+        Friend friendB = new Friend("B",44);
+
+        List<Friend> friendList = new ArrayList<>();
+        friendList.add(friendA);
+        friendList.add(friendB);
+
+        Trip trip = new Trip(friendList);
+
+        SplitWise splitWise = new SplitWise(trip);
+
+        assertTrue(splitWise.settle().isEmpty());
+    }
+
+    @Test
+    void shouldCalculateAverageAndAddToTransactionsDebtorBHasToPay30ToA() {
         Friend friend1 = new Friend("A", 100);
         Friend friend2 = new Friend("B", 40);
 
@@ -24,15 +35,16 @@ class SplitWiseTest {
         Trip trip = new Trip(friendList);
 
         SplitWise splitWise = new SplitWise(trip);
-        splitWise.settle();
+        List<Transaction> output = splitWise.settle();
 
-        assertTrue(friend1.getTransactions.get(0).equals(transaction1));
+        List<Transaction> expectedOutput = new ArrayList<>();
+        expectedOutput.add(new Transaction(30,friend1,friend2));
 
+        assertEquals(expectedOutput,output);
     }
 
-    @DisplayName("should print B gives A -> 10 and C gives A -> 40. ")
     @Test
-    void shouldPrint() {
+    void shouldCalculateAverageAndAddToTransactionsThatDebtorBHasToPay10ToA_CHasToPay40ToA() {
         Friend friend1 = new Friend("A", 100);
         Friend friend2 = new Friend("B", 40);
         Friend friend3 = new Friend("C", 10);
@@ -45,13 +57,17 @@ class SplitWiseTest {
         Trip trip = new Trip(friendList);
 
         SplitWise splitWise = new SplitWise(trip);
-        splitWise.settle();
+        List<Transaction> output = splitWise.settle();
 
+        List<Transaction> expectedOutput = new ArrayList<>();
+        expectedOutput.add(new Transaction(10,friend1,friend2));
+        expectedOutput.add(new Transaction(40,friend1,friend3));
+
+        assertEquals(expectedOutput,output);
     }
 
-    @DisplayName("should print friend A gives D -> 10, B gives D -> 70, C gives D -> 10.")
     @Test
-    void shouldPrintFriendAGivesD_10AndBGivesD_70AndCGivesD_10() {
+    void shouldCalculateAverageAndAddToTransactionsThatDebtorAHasToPay10ToD_BHasToPay70ToD_CHasToPay10ToD() {
         Friend friend1 = new Friend("A", 100);
         Friend friend2 = new Friend("B", 40);
         Friend friend3 = new Friend("C", 100);
@@ -66,6 +82,14 @@ class SplitWiseTest {
         Trip trip = new Trip(friendList);
 
         SplitWise splitWise = new SplitWise(trip);
-        splitWise.settle();
+        List<Transaction> output = splitWise.settle();
+
+        List<Transaction> expectedOutput = new ArrayList<>();
+        expectedOutput.add(new Transaction(10,friend4,friend1));
+        expectedOutput.add(new Transaction(70,friend4,friend2));
+        expectedOutput.add(new Transaction(10,friend4,friend3));
+
+        assertEquals(expectedOutput,output);
+
     }
 }
