@@ -25,22 +25,18 @@ class SplitWise {
 
     private void resolve(Friend creditor, double creditorAmountToGetBack) {
         for (Friend debtor : friends) {
-            if (debtor.getSpentAmount() < expenseOnEach) {
+            if ((debtor.getSpentAmount() < expenseOnEach)&&(creditorAmountToGetBack!=0)) {
                 debtor.setAmountToRepay(expenseOnEach - debtor.getSpentAmount());
                 double debtorExpenseToRepay = debtor.getAmountToRepay();
-                if (debtorExpenseToRepay == creditorAmountToGetBack) {
-                    transactions.add(new Transaction(debtorExpenseToRepay,creditor,debtor));
-                    creditorAmountToGetBack = 0;
-                    debtor.setAmountToRepay(0);
-                }
-                else if (debtorExpenseToRepay > creditorAmountToGetBack) {
-                    creditorAmountToGetBack = creditorAmountToGetBack - debtorExpenseToRepay;
+                if (debtorExpenseToRepay > creditorAmountToGetBack) {
+                    debtorExpenseToRepay = debtorExpenseToRepay - creditorAmountToGetBack;
                     transactions.add(new Transaction(creditorAmountToGetBack,creditor,debtor));
                     debtor.setAmountToRepay(debtorExpenseToRepay-creditorAmountToGetBack);
+                    creditorAmountToGetBack = 0;
                 }
-                else if (debtorExpenseToRepay < creditorAmountToGetBack) {
-                    creditorAmountToGetBack = creditorAmountToGetBack - debtorExpenseToRepay;
+                else {
                     transactions.add(new Transaction(debtorExpenseToRepay,creditor,debtor));
+                    creditorAmountToGetBack = creditorAmountToGetBack - debtorExpenseToRepay;
                     debtor.setAmountToRepay(0);
                 }
             }
